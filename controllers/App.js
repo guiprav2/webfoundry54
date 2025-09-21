@@ -8,5 +8,10 @@ export default class App {
       await post('projects.init');
       await post('companion.init');
     },
+
+    selectPanel: x => {
+      this.state.panel = x;
+      state.event.bus.emit('app:panel:select', { id: x });
+    },
   };
 };
