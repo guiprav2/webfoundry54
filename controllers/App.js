@@ -3,6 +3,7 @@ export default class App {
     init: async () => {
       await post('event.init');
       await post('settings.init');
+      await post('projects.init');
     },
   };
 };
