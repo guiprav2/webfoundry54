@@ -58,14 +58,13 @@
           wf-if="loadman.busy()"
           hidden=""
         >
-          <img src="../images/loading.svg" class="w-12" />
+          <img src="../media/loading.svg" class="w-12" />
           <div
             class="flex justify-center items-center text-xs absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-[55%] truncate w-8"
             wf-if="loadman.busy() &gt; 1"
-          >
-            {{loadman.busy()}}
-          </div>
+          ></div>
         </button>
+
         <button
           class="outline-none nf border-b border-black/50 transition-all text-xl hover:bg-black/70 w-16 h-16 IconsSidebar-projectsBtn nf-fa-sitemap"
           wf-class="{{state.app.panel === 'projects' &amp;&amp; 'bg-black/70'}}"

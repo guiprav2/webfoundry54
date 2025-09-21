@@ -1,3 +1,5 @@
+import '../other/util.js';
+
 export default class App {
   actions = {
     init: async () => {
