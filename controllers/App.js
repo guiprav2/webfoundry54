@@ -4,6 +4,7 @@ export default class App {
       await post('event.init');
       await post('settings.init');
       await post('projects.init');
+      await post('companion.init');
     },
   };
 };

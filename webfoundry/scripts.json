@@ -1,1 +1,1 @@
-["webfoundry/app.js","webfoundry/dominant.js","webfoundry/head.js","webfoundry/tailplay4.dafuq.js"]
+["controllers/App.js","controllers/Companion.js","controllers/Event.js","controllers/Projects.js","controllers/Settings.js","webfoundry/app.js","webfoundry/dominant.js","webfoundry/head.js","webfoundry/tailplay4.dafuq.js"]
