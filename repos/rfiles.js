@@ -9,10 +9,10 @@ class FilesRepository {
     switch (storage) {
       case 'local': {
         let ks = await lf.keys();
-        let prefix = `webfoundry:projects:objects:${uuid}:`;
+        let prefix = `webfoundry:projects:files:${uuid}:`;
         return ks.filter(x => x.startsWith(prefix)).map(x => x.slice(prefix.length));
       }
-      case 'cfs': return await post('companion.rpc', 'cfs:objects:list', name);
+      case 'cfs': return await post('companion.rpc', 'files:list', name);
       default: throw new Error(`Unknown project storage: ${storage}`);
     }
   }
@@ -21,8 +21,8 @@ class FilesRepository {
     let uuid = state.projects.names[name];
     let storage = rprojects.storage(name);
     switch (storage) {
-      case 'local': return await lf.setItem(`webfoundry:projects:objects:${uuid}:${path}`, blob);
-      case 'cfs': return await post('companion.rpc', 'cfs:objects:save', name, b64(blob));
+      case 'local': return await lf.setItem(`webfoundry:projects:files:${uuid}:${path}`, blob);
+      case 'cfs': return await post('companion.rpc', 'files:save', name, b64(blob));
       default: throw new Error(`Unknown project storage: ${storage}`);
     }
   }
@@ -31,8 +31,8 @@ class FilesRepository {
     let uuid = state.projects.names[name];
     let storage = rprojects.storage(name);
     switch (storage) {
-      case 'local': return await lf.getItem(`webfoundry:projects:objects:${uuid}:${path}`);
-      case 'cfs': return unb64(await post('companion.rpc', 'cfs:objects:load', name, path), mimeLookup(path));
+      case 'local': return await lf.getItem(`webfoundry:projects:files:${uuid}:${path}`);
+      case 'cfs': return unb64(await post('companion.rpc', 'files:load', name, path), mimeLookup(path));
       default: throw new Error(`Unknown project storage: ${storage}`);
     }
   }
@@ -42,12 +42,12 @@ class FilesRepository {
     let storage = rprojects.storage(name);
     switch (storage) {
       case 'local': {
-        let blob = await lf.getItem(`webfoundry:projects:objects:${uuid}:${path}`);
-        await lf.setItem(`webfoundry:projects:objects:${uuid}:${newPath}`, blob);
-        await lf.removeItem(`webfoundry:projects:objects:${uuid}:${path}`);
+        let blob = await lf.getItem(`webfoundry:projects:files:${uuid}:${path}`);
+        await lf.setItem(`webfoundry:projects:files:${uuid}:${newPath}`, blob);
+        await lf.removeItem(`webfoundry:projects:files:${uuid}:${path}`);
         break;
       }
-      case 'cfs': return await post('companion.rpc', 'cfs:objects:mv', path, newPath);
+      case 'cfs': return await post('companion.rpc', 'files:mv', path, newPath);
       default: throw new Error(`Unknown project storage: ${storage}`);
     }
   }
@@ -56,8 +56,8 @@ class FilesRepository {
     let uuid = state.projects.names[name];
     let storage = rprojects.storage(name);
     switch (storage) {
-      case 'local': return lf.removeItem(`webfoundry:projects:objects:${uuid}:${path}`);
-      case 'cfs': return await post('companion.rpc', 'cfs:objects:rm', path);
+      case 'local': return lf.removeItem(`webfoundry:projects:files:${uuid}:${path}`);
+      case 'cfs': return await post('companion.rpc', 'files:rm', path);
       default: throw new Error(`Unknown project storage: ${storage}`);
     }
   }

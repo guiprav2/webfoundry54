@@ -61,7 +61,7 @@ export default class Companion {
 };
 
 function createClient(key, opt = {}) {
-  opt.endpoint ??= 'ws://localhost:8844';
+  opt.endpoint ??= 'ws://localhost:8845';
   opt.timeout ??= 5000;
 
   let ret = {

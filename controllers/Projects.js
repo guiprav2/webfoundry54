@@ -11,6 +11,7 @@ export default class Projects {
       bus.on('projects:create:ready', async () => await post('projects.sync'));
       bus.on('projects:mv:ready', async () => await post('projects.sync'));
       bus.on('projects:rm:ready', async () => await post('projects.sync'));
+      bus.on('companion:connected', async () => await post('projects.sync'));
       await post('projects.sync');
     },
 
